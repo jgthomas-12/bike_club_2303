@@ -16,18 +16,26 @@ class Biker
   end
 
   def log_ride(ride, time)
-    if @acceptable_terrain.include?(ride.terrain)
+    if @acceptable_terrain.include?(ride.terrain) && @max_distance > ride.total_distance
       if @rides[ride] == nil
         @rides[ride] = [time]
       else
         @rides[ride] += [time]
       end
     end
-    # rider_log = Hash.new(0)
-    # require 'pry'; binding.pry
-    # if rider_log.keys.include?(ride.name)
-    #   rider_log[ride] = time
-    # end
+  end
 
+  def personal_record(ride)
+    pers_rec = Hash.new(0)
+    @rides.each do |rides, times|
+      if ride == rides
+        min_time =times.min_by do |time|
+          time
+        end
+        pers_rec[rides] = min_time
+      end
+    end
+    return pers_rec[ride] unless !pers_rec.keys.include?(ride)
+    false
   end
 end
