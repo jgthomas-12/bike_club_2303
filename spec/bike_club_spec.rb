@@ -14,29 +14,29 @@ RSpec.describe BikeClub do
     @ride3 = Ride.new({name: "Jamestown", distance: 20, loop: true, terrain: :gravel})
   end
 
-  describe 'initialize' do
-    it 'exists' do
+  describe "initialize" do
+    it "exists" do
       expect(@bike_club).to be_a(BikeClub)
     end
 
-    it 'has readable attributes' do
+    it "has readable attributes" do
       expect(@bike_club.name).to eq("Dill")
     end
 
-    it 'starts with no memebers' do
+    it "starts with no memebers" do
       expect(@bike_club.bikers).to eq([])
     end
   end
 
-  describe '#add_biker' do
-    it 'can add a biker to the club' do
+  describe "#add_biker" do
+    it "can add a biker to the club" do
       @bike_club.add_biker(@biker)
       expect(@bike_club.bikers).to eq([@biker])
     end
   end
 
-  describe '#most_rides' do
-    it 'can return the biker with the most rides' do
+  describe "#most_rides" do
+    it "can return the biker with the most rides" do
       @biker.learn_terrain!(:hills)
       @biker.learn_terrain!(:gravel)
       @biker3.learn_terrain!(:hills)
@@ -52,8 +52,8 @@ RSpec.describe BikeClub do
 
       expect(@bike_club.bikers).to eq([@biker])
 
-      @biker3.log_ride(@ride1, 92.5)
-      @biker3.log_ride(@ride1, 91.1)
+      @biker3.log_ride(@ride1, 89)
+      @biker3.log_ride(@ride1, 87)
       @biker3.log_ride(@ride2, 60.9)
 
       @bike_club.add_biker(@biker3)
@@ -63,4 +63,31 @@ RSpec.describe BikeClub do
       expect(@bike_club.most_rides).to eq(@biker)
     end
   end
+
+  describe "#best_time" do
+    it "can return the biker with the best time of a specific ride" do
+      @biker.learn_terrain!(:hills)
+      @biker.learn_terrain!(:gravel)
+      @biker3.learn_terrain!(:hills)
+      @biker3.learn_terrain!(:gravel)
+
+      @biker.log_ride(@ride1, 92.5)
+      @biker.log_ride(@ride1, 91.1)
+      @biker.log_ride(@ride2, 60.9)
+      @biker.log_ride(@ride2, 61.6)
+      @biker.log_ride(@ride3, 100)
+
+      @bike_club.add_biker(@biker)
+
+      @biker3.log_ride(@ride1, 89)
+      @biker3.log_ride(@ride1, 87)
+      @biker3.log_ride(@ride2, 60.9)
+
+      @bike_club.add_biker(@biker3)
+
+      expect(@bike_club.best_time(@ride1)).to eq(@biker3)
+    end
+  end
+
+
 end
