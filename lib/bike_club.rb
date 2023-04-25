@@ -27,4 +27,26 @@ class BikeClub
     end
     most[0]
   end
+
+  def best_time(ride)
+    biker_best_time = Hash.new(0)
+    @bikers.each do |biker|
+      biker.rides.each do |ride1, times|
+        if ride == ride1
+          if times.count > 1
+            best_time = times.min_by do |time|
+              time
+            end
+            biker_best_time[biker] = best_time
+          else
+            biker_best_time[biker] = times
+          end
+        end
+      end
+    end
+    best = biker_best_time.min_by do |biker, time|
+      time
+    end
+    best[0]
+  end
 end
