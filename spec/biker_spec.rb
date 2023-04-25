@@ -36,8 +36,8 @@ RSpec.describe Biker do
     end
   end
 
-  describe '#log_ride' do
-    it 'can log a ride with a time' do
+  describe "#log_ride" do
+    it "can log a ride with a time" do
       @biker.learn_terrain!(:hills)
 
       @biker.log_ride(@ride1, 92.5)
@@ -48,7 +48,7 @@ RSpec.describe Biker do
       expect(@biker.rides).to eq(expected)
     end
 
-    it 'can log a ride with multipile times' do
+    it "can log a ride with multipile times" do
       @biker.learn_terrain!(:hills)
       @biker.learn_terrain!(:gravel)
 
@@ -65,8 +65,8 @@ RSpec.describe Biker do
     end
   end
 
-  describe '#personal_record' do
-    it 'returns the best time of a ride key' do
+  describe "#personal_record" do
+    it "returns the best time of a ride key" do
       @biker.learn_terrain!(:hills)
       @biker.learn_terrain!(:gravel)
 
@@ -80,8 +80,8 @@ RSpec.describe Biker do
     end
   end
 
-  describe 'biker 2' do
-    it 'can do all the things' do
+  describe "biker 2" do
+    it "can do all the things" do
       @biker2.log_ride(@ride1, 97.0)
       @biker2.log_ride(@ride2, 67.0)
 
